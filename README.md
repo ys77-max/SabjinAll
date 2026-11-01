@@ -90,6 +90,8 @@ Set `VITE_APPCHECK_DEBUG=true` locally to use an App Check debug token.
 
 Run a deploy by hand from Actions → *Deploy to Firebase* → *Run workflow*.
 
+**PR previews.** `.github/workflows/preview.yml` builds every pull request (from this repo, not forks) and deploys it to a Hosting preview channel that expires after 7 days; the action comments the URL on the PR. It reuses the secret and variables above, and the service account also needs the Firebase Hosting Admin role (included in Firebase Admin). Previews are **hosting only and use the production Firestore, Auth and Functions**. To sign in on a preview, add its domain (`<project>--pr-<n>-<branch>-<hash>.web.app`, shown in the PR comment) to Authentication → Settings → Authorized domains, and to the App Check reCAPTCHA Enterprise key's allowed domains.
+
 ## Engine rules (Cloud Functions; the client only renders)
 
 1. Carry-overs from the last delivery (`not_seen` / `short`) → `shortage_carry`
