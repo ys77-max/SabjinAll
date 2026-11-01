@@ -1,13 +1,15 @@
 import { initializeApp } from 'firebase/app';
 import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'firebase/app-check';
-import { getAuth } from 'firebase/auth';
+import { connectAuthEmulator, getAuth } from 'firebase/auth';
 import {
+  connectFirestoreEmulator,
   initializeFirestore,
   persistentLocalCache,
   persistentMultipleTabManager,
+  waitForPendingWrites,
 } from 'firebase/firestore';
-import { getStorage } from 'firebase/storage';
-import { getFunctions, httpsCallable } from 'firebase/functions';
+import { connectStorageEmulator, getStorage } from 'firebase/storage';
+import { connectFunctionsEmulator, getFunctions, httpsCallable } from 'firebase/functions';
 import { getMessaging, isSupported as messagingSupported, type Messaging } from 'firebase/messaging';
 
 const env = import.meta.env;
@@ -44,10 +46,23 @@ export const db = initializeFirestore(app, {
 export const storage = getStorage(app);
 export const functions = getFunctions(app, env.VITE_FUNCTIONS_REGION || 'asia-south1');
 
+// Local development against `firebase emulators:start`
+if (env.VITE_USE_EMULATORS === 'true') {
+  connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true });
+  connectFirestoreEmulator(db, '127.0.0.1', 8080);
+  connectStorageEmulator(storage, '127.0.0.1', 9199);
+  connectFunctionsEmulator(functions, '127.0.0.1', 5001);
+}
+
 let messagingPromise: Promise<Messaging | null> | null = null;
 export function getMessagingSafe(): Promise<Messaging | null> {
   messagingPromise ??= messagingSupported().then((ok) => (ok ? getMessaging(app) : null)).catch(() => null);
   return messagingPromise;
+}
+
+/** Callables read server state; flush queued local writes first (bounded so a flaky network can't hang the UI). */
+export async function flushWrites(ms = 8000) {
+  await Promise.race([waitForPendingWrites(db), new Promise((r) => setTimeout(r, ms))]);
 }
 
 /* ---------- typed callables ---------- */

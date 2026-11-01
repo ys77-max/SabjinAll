@@ -13,8 +13,8 @@ export { FieldValue, Timestamp };
 
 export const REGION = 'asia-south1';
 
-/** Shared options for callables: App Check enforced, region pinned. */
-export const callableOpts = { region: REGION, enforceAppCheck: true } as const;
+/** Shared options for callables: App Check enforced in production (the emulator has no App Check), region pinned. */
+export const callableOpts = { region: REGION, enforceAppCheck: process.env.FUNCTIONS_EMULATOR !== 'true' } as const;
 
 export const hh = (householdId: string) => db.collection('households').doc(householdId);
 

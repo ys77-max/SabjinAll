@@ -54,6 +54,16 @@ test('rule 4: biweekly due at ≥12 days, monthly at ≥26 days', () => {
   assert.deepEqual(Object.keys(reasons(out)).sort(), ['bw-due', 'm-due']);
 });
 
+test('rule 4: never-received biweekly/monthly items count from catalogue anchor', () => {
+  const out = proposeOrder(input([
+    item({ id: 'new-bw', rotation: 'biweekly', anchorAt: daysAgo(3) }),
+    item({ id: 'old-bw', rotation: 'biweekly', anchorAt: daysAgo(13) }),
+    item({ id: 'no-anchor-m', rotation: 'monthly' }),
+    item({ id: 'weekly', rotation: 'weekly', anchorAt: daysAgo(1) }),
+  ]));
+  assert.deepEqual(Object.keys(reasons(out)).sort(), ['no-anchor-m', 'old-bw', 'weekly']);
+});
+
 test('rule 5: shelf-life suppression writes skipped "still at home"', () => {
   const out = proposeOrder(input([item({ id: 'onion', shelfLifeDays: 30, lastReceivedAt: daysAgo(7) })]));
   assert.equal(out.lines.length, 0);

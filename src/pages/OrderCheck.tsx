@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { collection, doc, setDoc, Timestamp } from 'firebase/firestore';
 import { ref as storageRef, uploadBytes } from 'firebase/storage';
-import { db, storage, callables } from '../lib/firebase';
+import { db, storage, callables, flushWrites } from '../lib/firebase';
 import { useHousehold } from '../lib/household';
 import { useDocument, useOnline, useQuery } from '../lib/hooks';
 import { sendShortage } from '../lib/actions';
@@ -92,6 +92,7 @@ export default function OrderCheck() {
     if (!order) return;
     setBusy(true);
     try {
+      await flushWrites();
       const { data } = await callables.confirmDelivery({
         householdId: householdId!,
         orderId: order.id,

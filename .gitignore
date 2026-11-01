@@ -9,3 +9,4 @@ functions/node_modules
 .firebase
 serviceAccount*.json
 *.tsbuildinfo
+functions/.secret.local

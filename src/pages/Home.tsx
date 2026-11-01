@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useHousehold } from '../lib/household';
-import { callables } from '../lib/firebase';
+import { callables, flushWrites } from '../lib/firebase';
 import { addToOrder, queueForNextOrder, recordStock, sendReminder, unqueue } from '../lib/actions';
 import { computeBeliefs, type Belief } from '../lib/pantry';
 import { DAY_NAMES, localName } from '../lib/i18n';
@@ -120,6 +120,7 @@ function NoOrderCard({ vendors }: { vendors: Vendor[] }) {
   async function makeNow() {
     setBusy(true);
     try {
+      await flushWrites();
       const res = await callables.generateDraftNow({ householdId: householdId!, vendorId: vendor.id });
       nav(`/order/${res.data.orderId}`);
     } catch (e) {

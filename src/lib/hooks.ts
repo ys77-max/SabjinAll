@@ -16,13 +16,13 @@ export interface Snap<T> {
 
 /** Live query from Firestore. Serves cached data offline (persistentLocalCache). */
 export function useQuery<T>(q: Query<DocumentData> | null, deps: unknown[]): Snap<T[]> {
-  const [state, setState] = useState<Snap<T[]>>({ data: [], loading: !!q, error: null, fromCache: false });
+  const key = JSON.stringify(deps);
+  const [state, setState] = useState<Snap<T[]> & { key: string }>({ data: [], loading: !!q, error: null, fromCache: false, key });
   useEffect(() => {
     if (!q) {
-      setState({ data: [], loading: false, error: null, fromCache: false });
+      setState({ data: [], loading: false, error: null, fromCache: false, key });
       return;
     }
-    setState((s) => ({ ...s, loading: true }));
     return onSnapshot(
       q,
       { includeMetadataChanges: true },
@@ -32,19 +32,22 @@ export function useQuery<T>(q: Query<DocumentData> | null, deps: unknown[]): Sna
           loading: false,
           error: null,
           fromCache: snap.metadata.fromCache,
+          key,
         }),
-      (error) => setState((s) => ({ ...s, loading: false, error })),
+      (error) => setState((s) => ({ ...s, loading: false, error, key })),
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, deps);
-  return state;
+  }, [key]);
+  // Until the snapshot for the *current* deps arrives, report loading (avoids one stale render).
+  return state.key === key ? state : { data: [], loading: !!q, error: null, fromCache: false };
 }
 
 export function useDocument<T>(ref: DocumentReference<DocumentData> | null, deps: unknown[]): Snap<T | null> {
-  const [state, setState] = useState<Snap<T | null>>({ data: null, loading: !!ref, error: null, fromCache: false });
+  const key = JSON.stringify(deps);
+  const [state, setState] = useState<Snap<T | null> & { key: string }>({ data: null, loading: !!ref, error: null, fromCache: false, key });
   useEffect(() => {
     if (!ref) {
-      setState({ data: null, loading: false, error: null, fromCache: false });
+      setState({ data: null, loading: false, error: null, fromCache: false, key });
       return;
     }
     return onSnapshot(
@@ -56,12 +59,13 @@ export function useDocument<T>(ref: DocumentReference<DocumentData> | null, deps
           loading: false,
           error: null,
           fromCache: snap.metadata.fromCache,
+          key,
         }),
-      (error) => setState((s) => ({ ...s, loading: false, error })),
+      (error) => setState((s) => ({ ...s, loading: false, error, key })),
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, deps);
-  return state;
+  }, [key]);
+  return state.key === key ? state : { data: null, loading: !!ref, error: null, fromCache: false };
 }
 
 function subscribeOnline(cb: () => void) {

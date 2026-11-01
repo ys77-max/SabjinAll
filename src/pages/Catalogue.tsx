@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { collection, doc, setDoc, updateDoc } from 'firebase/firestore';
+import { collection, doc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import { useHousehold } from '../lib/household';
 import { catLabel, localName, MONTHS_SHORT, rotLabel, unitLabel } from '../lib/i18n';
@@ -87,7 +87,7 @@ function ItemForm({ id, initial, onDone }: { id: string | null; initial: Draft; 
     } else {
       const slug = d.nameEn.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || doc(col).id;
       await setDoc(doc(col, `${slug}-${Date.now().toString(36).slice(-4)}`), {
-        ...d, lastReceivedAt: null, lastFinishedAt: null, stockState: 'unknown', skipStreak: 0, addStreak: 0, peakMonths: [],
+        ...d, lastReceivedAt: null, lastFinishedAt: null, stockState: 'unknown', skipStreak: 0, addStreak: 0, peakMonths: [], createdAt: serverTimestamp(),
       });
     }
     onDone();

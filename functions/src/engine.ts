@@ -30,6 +30,9 @@ export interface EngineItem {
   lastFinishedAt: number | null;
   halfLeftAt: number | null;
   medianKeptQty: number | null;
+  /** When the item entered the catalogue. Never-received biweekly/monthly items count rotation from here,
+   *  so a brand-new household's first list is the weekly staples, not the whole catalogue. */
+  anchorAt?: number | null;
 }
 
 export interface EngineInput {
@@ -137,10 +140,12 @@ export function proposeOrder(input: EngineInput): EngineOutput {
 
     // Rule 4 — rotation due
     const daysSince = it.lastReceivedAt === null ? Infinity : (deliveryMs - it.lastReceivedAt) / DAY_MS;
+    const rotationRef = it.lastReceivedAt ?? it.anchorAt ?? null;
+    const rotationDays = rotationRef === null ? Infinity : (deliveryMs - rotationRef) / DAY_MS;
     const due =
       it.rotation === 'weekly' ||
-      (it.rotation === 'biweekly' && daysSince >= 12) ||
-      (it.rotation === 'monthly' && daysSince >= 26);
+      (it.rotation === 'biweekly' && rotationDays >= 12) ||
+      (it.rotation === 'monthly' && rotationDays >= 26);
     if (!due) continue;
 
     // Rule 5 — shelf-life suppression (no finished event since receipt)

@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { collection, doc, updateDoc } from 'firebase/firestore';
-import { db, callables } from '../lib/firebase';
+import { db, callables, flushWrites } from '../lib/firebase';
 import { useHousehold } from '../lib/household';
 import { useDocument, useOnline, useQuery } from '../lib/hooks';
 import {
@@ -51,6 +51,7 @@ export default function OrderPage() {
     if (!active.length) return toast(t('emptyList'));
     setBusy(true);
     try {
+      await flushWrites();
       const { data } = await callables.buildMessage({ householdId: householdId!, orderId: order.id });
       await markSent(householdId!, order);
       await logMessage(householdId!, user!.uid, order, 'order', data.text, vendor.language);

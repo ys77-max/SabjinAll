@@ -73,6 +73,7 @@ export const createHousehold = onCall(callableOpts, async (req) => {
       addStreak: 0,
       addHistory: [],
       medianKeptQty: null,
+      createdAt: FieldValue.serverTimestamp(),
     });
   }
   await batch.commit();

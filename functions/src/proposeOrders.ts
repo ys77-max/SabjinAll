@@ -74,6 +74,7 @@ export async function proposeForVendor(householdId: string, vendorId: string, fo
     lastFinishedAt: toMs(d.get('lastFinishedAt')),
     halfLeftAt: toMs(d.get('halfLeftAt')),
     medianKeptQty: d.get('medianKeptQty') ?? null,
+    anchorAt: toMs(d.get('createdAt')),
   }));
   const itemById = new Map(items.map((i) => [i.id, i]));
   const vendorCategories: Category[] = vendor.get('categories') ?? [];

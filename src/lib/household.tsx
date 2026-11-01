@@ -74,7 +74,8 @@ export function HouseholdProvider({ children }: { children: ReactNode }) {
       user,
       authReady,
       householdId,
-      householdReady: authReady && (!user || !userDoc.loading),
+      // "No household" only once the server confirms it — a cold cache can briefly report a missing doc.
+      householdReady: authReady && (!user || (!userDoc.loading && (!!userDoc.data || !userDoc.fromCache))),
       household: household.data,
       members: members.data,
       vendors: vendors.data,
@@ -86,7 +87,7 @@ export function HouseholdProvider({ children }: { children: ReactNode }) {
       setLocalLang: (l) => setLocalLangState(l),
       t: (key, vars) => translate(lang, key, vars),
     }),
-    [user, authReady, householdId, userDoc.loading, household.data, members.data, vendors.data, items.data,
+    [user, authReady, householdId, userDoc.loading, userDoc.data, userDoc.fromCache, household.data, members.data, vendors.data, items.data,
       recentOrders.data, stockEvents.data, queue.data, lang],
   );
   return <HouseholdContext.Provider value={value}>{children}</HouseholdContext.Provider>;
