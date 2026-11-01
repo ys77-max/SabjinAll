@@ -1,0 +1,24 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isMember(h) {
+      return request.auth != null
+        && firestore.exists(/databases/(default)/documents/households/$(h)/members/$(request.auth.uid));
+    }
+
+    // Delivery photos: households/{h}/orders/{orderId}/{photoId}.jpg
+    // Deleted after 7 days by the bucket lifecycle rule (storage-lifecycle.json).
+    match /households/{h}/{allPaths=**} {
+      allow read: if isMember(h);
+      allow create, update: if isMember(h)
+        && request.resource.size < 8 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+      allow delete: if isMember(h);
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

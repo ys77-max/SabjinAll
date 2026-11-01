@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-tap-highlight-color: transparent; }
+  body { @apply bg-paper text-gray-900 antialiased; overscroll-behavior-y: none; }
+  input, select, textarea { @apply text-base; }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex min-h-tap items-center justify-center gap-2 rounded-2xl px-5 font-semibold transition active:scale-[0.98] disabled:opacity-50;
+  }
+  .btn-primary { @apply btn bg-brand-700 text-white shadow-sm active:bg-brand-800; }
+  .btn-secondary { @apply btn border border-brand-200 bg-white text-brand-800; }
+  .btn-ghost { @apply btn text-brand-800; }
+  .btn-danger { @apply btn border border-red-200 bg-white text-red-700; }
+  .card { @apply rounded-3xl bg-white p-4 shadow-sm ring-1 ring-black/5; }
+  .chip { @apply inline-flex min-h-[32px] items-center rounded-full px-3 text-sm; }
+  .field { @apply block w-full min-h-tap rounded-xl border border-gray-300 bg-white px-3 focus:border-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-200; }
+  .label { @apply mb-1 block text-sm font-medium text-gray-600; }
+  .page { @apply mx-auto max-w-lg px-4 pb-40 pt-4; }
+  .bottom-bar { @apply fixed inset-x-0 z-20 mx-auto max-w-lg px-4; bottom: calc(68px + env(safe-area-inset-bottom)); }
+}

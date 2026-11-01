@@ -1,0 +1,115 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function memberPath(h) { return /databases/$(database)/documents/households/$(h)/members/$(request.auth.uid); }
+    function isMember(h) { return signedIn() && exists(memberPath(h)); }
+    function isOwner(h) { return isMember(h) && get(memberPath(h)).data.role == 'owner'; }
+    function changed() { return request.resource.data.diff(resource.data).affectedKeys(); }
+    function onlyChanges(keys) { return changed().hasOnly(keys); }
+    function incoming() { return request.resource.data; }
+
+    // uid → householdId, written by createHousehold / joinHousehold only
+    match /users/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    // Global read-only reference data (admin SDK only)
+    match /seedItems/{id} { allow read: if signedIn(); allow write: if false; }
+    match /seasonCalendar/{region}/items/{id} { allow read: if signedIn(); allow write: if false; }
+    match /festivals/{id} { allow read: if signedIn(); allow write: if false; }
+
+    match /households/{h} {
+      allow read: if isMember(h);
+      allow create, delete: if false; // createHousehold callable
+      allow update: if isOwner(h)
+        && onlyChanges(['name', 'city', 'languagePref', 'notifyDraftHour', 'notifyDeliveryDue']);
+
+      match /members/{uid} {
+        allow read: if isMember(h);
+        allow create: if false; // joinHousehold callable only
+        allow update: if isMember(h) && request.auth.uid == uid && onlyChanges(['name', 'fcmTokens']);
+        // owner removes others; a member may leave
+        allow delete: if (isOwner(h) && uid != request.auth.uid)
+          || (isMember(h) && uid == request.auth.uid && resource.data.role != 'owner');
+      }
+
+      match /vendors/{v} {
+        allow read, write: if isMember(h);
+      }
+
+      // Pantry belief + learning fields are maintained by Functions from stockEvents / approvals.
+      match /items/{i} {
+        function functionOnly() {
+          return ['lastReceivedAt', 'lastFinishedAt', 'halfLeftAt', 'stockState', 'skipStreak', 'addStreak',
+                  'addHistory', 'medianKeptQty', 'keptQtyHistory', 'effectiveShelfLifeDays'];
+        }
+        allow read: if isMember(h);
+        allow create: if isMember(h)
+          && !incoming().keys().hasAny(['medianKeptQty', 'keptQtyHistory', 'effectiveShelfLifeDays', 'addHistory', 'halfLeftAt'])
+          && incoming().get('lastReceivedAt', null) == null && incoming().get('lastFinishedAt', null) == null
+          && incoming().nameEn is string && incoming().defaultQty is number;
+        allow update: if isMember(h) && !changed().hasAny(functionOnly());
+        allow delete: if isMember(h);
+      }
+
+      match /stockEvents/{e} {
+        allow read: if isMember(h);
+        allow create: if isMember(h)
+          && incoming().byUid == request.auth.uid
+          && incoming().kind in ['received', 'finished', 'half_left', 'spoiled', 'manual_set']
+          && incoming().source == 'tap'
+          && incoming().qty is number;
+        allow update, delete: if false;
+      }
+
+      match /orders/{o} {
+        allow read: if isMember(h);
+        allow create, delete: if false; // proposeOrders / generateDraftNow
+        // Client may only: mark sent, record reminders, cancel, edit notes. Everything else is Function-owned
+        // (generatedAt, recognition, latenessMin, messageText, approvedAt, receivedAt, totalSpend …).
+        allow update: if isMember(h)
+          && onlyChanges(['status', 'sentAt', 'reminderCount', 'notes'])
+          && (
+            incoming().status == resource.data.status
+            || (incoming().status in ['sent', 'reminded'] && resource.data.status in ['approved', 'sent', 'reminded'])
+            || (incoming().status == 'cancelled' && resource.data.status in ['draft', 'approved', 'sent', 'reminded'])
+          )
+          && (!changed().hasAny(['reminderCount']) || incoming().reminderCount == resource.data.reminderCount + 1);
+
+        match /items/{i} {
+          allow read: if isMember(h);
+          allow create: if isMember(h)
+            && get(/databases/$(database)/documents/households/$(h)/orders/$(o)).data.status in ['draft', 'approved']
+            && incoming().status == 'added'
+            && incoming().photoConfidence == null && incoming().receivedStatus == null;
+          allow update: if isMember(h) && onlyChanges(['qty', 'unit', 'status', 'price']);
+          allow delete: if false;
+        }
+
+        match /photos/{p} {
+          allow read: if isMember(h);
+          allow create: if isMember(h)
+            && incoming().keys().hasOnly(['storagePath', 'takenAt', 'expiresAt'])
+            && incoming().storagePath.matches('households/' + h + '/orders/' + o + '/.*');
+          allow update, delete: if false; // recognition is written by recogniseDelivery
+        }
+      }
+
+      match /messages/{m} {
+        allow read: if isMember(h);
+        allow create: if isMember(h) && incoming().byUid == request.auth.uid
+          && incoming().kind in ['order', 'reminder', 'shortage', 'thanks'];
+        allow update, delete: if false;
+      }
+
+      match /nextOrderQueue/{i} {
+        allow read, delete: if isMember(h);
+        allow create, update: if isMember(h) && incoming().addedByUid == request.auth.uid && incoming().qty is number;
+      }
+    }
+  }
+}

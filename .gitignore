@@ -1,0 +1,11 @@
+node_modules
+dist
+dev-dist
+.env
+.env.local
+functions/lib
+functions/node_modules
+*.log
+.firebase
+serviceAccount*.json
+*.tsbuildinfo

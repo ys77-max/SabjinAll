@@ -1,0 +1,1174 @@
+[
+  {
+    "id": "spinach",
+    "nameEn": "Spinach",
+    "nameHi": "पालक",
+    "nameMr": "पालक",
+    "category": "leafy",
+    "defaultUnit": "bunch",
+    "defaultQty": 2,
+    "shelfLifeDays": 3,
+    "seasonMonths": [],
+    "rotation": "weekly",
+    "peakMonths": [
+      11,
+      12,
+      1,
+      2
+    ]
+  },
+  {
+    "id": "fenugreek",
+    "nameEn": "Fenugreek leaves",
+    "nameHi": "मेथी",
+    "nameMr": "मेथी",
+    "category": "leafy",
+    "defaultUnit": "bunch",
+    "defaultQty": 2,
+    "shelfLifeDays": 2,
+    "seasonMonths": [
+      10,
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "rotation": "weekly",
+    "peakMonths": [
+      12,
+      1
+    ]
+  },
+  {
+    "id": "dill",
+    "nameEn": "Dill",
+    "nameHi": "सोआ",
+    "nameMr": "शेपू",
+    "category": "leafy",
+    "defaultUnit": "bunch",
+    "defaultQty": 1,
+    "shelfLifeDays": 2,
+    "seasonMonths": [
+      10,
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "rotation": "biweekly",
+    "peakMonths": [
+      12,
+      1
+    ]
+  },
+  {
+    "id": "red-amaranth",
+    "nameEn": "Red amaranth",
+    "nameHi": "लाल चौलाई",
+    "nameMr": "लाल माठ",
+    "category": "leafy",
+    "defaultUnit": "bunch",
+    "defaultQty": 1,
+    "shelfLifeDays": 2,
+    "seasonMonths": [],
+    "rotation": "biweekly",
+    "peakMonths": [
+      6,
+      7,
+      8
+    ]
+  },
+  {
+    "id": "spring-onion",
+    "nameEn": "Spring onion",
+    "nameHi": "हरा प्याज",
+    "nameMr": "कांद्याची पात",
+    "category": "leafy",
+    "defaultUnit": "bunch",
+    "defaultQty": 1,
+    "shelfLifeDays": 4,
+    "seasonMonths": [
+      10,
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "rotation": "biweekly",
+    "peakMonths": [
+      12,
+      1
+    ]
+  },
+  {
+    "id": "mustard-greens",
+    "nameEn": "Mustard greens",
+    "nameHi": "सरसों का साग",
+    "nameMr": "मोहरीची भाजी",
+    "category": "leafy",
+    "defaultUnit": "bunch",
+    "defaultQty": 1,
+    "shelfLifeDays": 3,
+    "seasonMonths": [
+      11,
+      12,
+      1,
+      2
+    ],
+    "rotation": "on_demand",
+    "peakMonths": [
+      12,
+      1
+    ]
+  },
+  {
+    "id": "colocasia-leaves",
+    "nameEn": "Colocasia leaves",
+    "nameHi": "अरबी के पत्ते",
+    "nameMr": "अळूची पाने",
+    "category": "leafy",
+    "defaultUnit": "bunch",
+    "defaultQty": 1,
+    "shelfLifeDays": 2,
+    "seasonMonths": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "rotation": "on_demand",
+    "peakMonths": [
+      7,
+      8
+    ]
+  },
+  {
+    "id": "drumstick-leaves",
+    "nameEn": "Drumstick leaves",
+    "nameHi": "सहजन के पत्ते",
+    "nameMr": "शेवग्याची पाने",
+    "category": "leafy",
+    "defaultUnit": "bunch",
+    "defaultQty": 1,
+    "shelfLifeDays": 2,
+    "seasonMonths": [],
+    "rotation": "on_demand",
+    "peakMonths": []
+  },
+  {
+    "id": "coriander",
+    "nameEn": "Coriander",
+    "nameHi": "धनिया",
+    "nameMr": "कोथिंबीर",
+    "category": "herb",
+    "defaultUnit": "bunch",
+    "defaultQty": 2,
+    "shelfLifeDays": 4,
+    "seasonMonths": [],
+    "rotation": "weekly",
+    "peakMonths": [
+      11,
+      12,
+      1
+    ]
+  },
+  {
+    "id": "mint",
+    "nameEn": "Mint",
+    "nameHi": "पुदीना",
+    "nameMr": "पुदिना",
+    "category": "herb",
+    "defaultUnit": "bunch",
+    "defaultQty": 1,
+    "shelfLifeDays": 3,
+    "seasonMonths": [],
+    "rotation": "biweekly",
+    "peakMonths": [
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "id": "curry-leaves",
+    "nameEn": "Curry leaves",
+    "nameHi": "करी पत्ता",
+    "nameMr": "कढीपत्ता",
+    "category": "herb",
+    "defaultUnit": "bunch",
+    "defaultQty": 1,
+    "shelfLifeDays": 7,
+    "seasonMonths": [],
+    "rotation": "biweekly",
+    "peakMonths": []
+  },
+  {
+    "id": "green-chilli",
+    "nameEn": "Green chilli",
+    "nameHi": "हरी मिर्च",
+    "nameMr": "हिरवी मिरची",
+    "category": "herb",
+    "defaultUnit": "g",
+    "defaultQty": 100,
+    "shelfLifeDays": 7,
+    "seasonMonths": [],
+    "rotation": "weekly",
+    "peakMonths": []
+  },
+  {
+    "id": "ginger",
+    "nameEn": "Ginger",
+    "nameHi": "अदरक",
+    "nameMr": "आले",
+    "category": "herb",
+    "defaultUnit": "g",
+    "defaultQty": 100,
+    "shelfLifeDays": 21,
+    "seasonMonths": [],
+    "rotation": "biweekly",
+    "peakMonths": [
+      11,
+      12,
+      1
+    ]
+  },
+  {
+    "id": "garlic",
+    "nameEn": "Garlic",
+    "nameHi": "लहसुन",
+    "nameMr": "लसूण",
+    "category": "herb",
+    "defaultUnit": "g",
+    "defaultQty": 250,
+    "shelfLifeDays": 30,
+    "seasonMonths": [],
+    "rotation": "monthly",
+    "peakMonths": [
+      3,
+      4
+    ]
+  },
+  {
+    "id": "lemon",
+    "nameEn": "Lemon",
+    "nameHi": "नींबू",
+    "nameMr": "लिंबू",
+    "category": "herb",
+    "defaultUnit": "pc",
+    "defaultQty": 6,
+    "shelfLifeDays": 14,
+    "seasonMonths": [],
+    "rotation": "weekly",
+    "peakMonths": [
+      6,
+      7,
+      8
+    ]
+  },
+  {
+    "id": "tomato",
+    "nameEn": "Tomato",
+    "nameHi": "टमाटर",
+    "nameMr": "टोमॅटो",
+    "category": "vegetable",
+    "defaultUnit": "kg",
+    "defaultQty": 1,
+    "shelfLifeDays": 5,
+    "seasonMonths": [],
+    "rotation": "weekly",
+    "peakMonths": [
+      12,
+      1,
+      2
+    ]
+  },
+  {
+    "id": "brinjal",
+    "nameEn": "Brinjal",
+    "nameHi": "बैंगन",
+    "nameMr": "वांगी",
+    "category": "vegetable",
+    "defaultUnit": "g",
+    "defaultQty": 500,
+    "shelfLifeDays": 5,
+    "seasonMonths": [],
+    "rotation": "biweekly",
+    "peakMonths": [
+      11,
+      12,
+      1
+    ]
+  },
+  {
+    "id": "okra",
+    "nameEn": "Okra (bhindi)",
+    "nameHi": "भिंडी",
+    "nameMr": "भेंडी",
+    "category": "vegetable",
+    "defaultUnit": "g",
+    "defaultQty": 500,
+    "shelfLifeDays": 3,
+    "seasonMonths": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "rotation": "weekly",
+    "peakMonths": [
+      5,
+      6,
+      7
+    ]
+  },
+  {
+    "id": "cauliflower",
+    "nameEn": "Cauliflower",
+    "nameHi": "फूलगोभी",
+    "nameMr": "फ्लॉवर",
+    "category": "vegetable",
+    "defaultUnit": "pc",
+    "defaultQty": 1,
+    "shelfLifeDays": 5,
+    "seasonMonths": [
+      10,
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "rotation": "biweekly",
+    "peakMonths": [
+      12,
+      1
+    ]
+  },
+  {
+    "id": "cabbage",
+    "nameEn": "Cabbage",
+    "nameHi": "पत्तागोभी",
+    "nameMr": "कोबी",
+    "category": "vegetable",
+    "defaultUnit": "pc",
+    "defaultQty": 1,
+    "shelfLifeDays": 10,
+    "seasonMonths": [
+      10,
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "rotation": "biweekly",
+    "peakMonths": [
+      12,
+      1
+    ]
+  },
+  {
+    "id": "capsicum",
+    "nameEn": "Capsicum",
+    "nameHi": "शिमला मिर्च",
+    "nameMr": "ढोबळी मिरची",
+    "category": "vegetable",
+    "defaultUnit": "g",
+    "defaultQty": 250,
+    "shelfLifeDays": 7,
+    "seasonMonths": [],
+    "rotation": "biweekly",
+    "peakMonths": [
+      11,
+      12,
+      1
+    ]
+  },
+  {
+    "id": "bottle-gourd",
+    "nameEn": "Bottle gourd",
+    "nameHi": "लौकी",
+    "nameMr": "दुधी भोपळा",
+    "category": "vegetable",
+    "defaultUnit": "pc",
+    "defaultQty": 1,
+    "shelfLifeDays": 7,
+    "seasonMonths": [],
+    "rotation": "biweekly",
+    "peakMonths": [
+      4,
+      5,
+      6
+    ]
+  },
+  {
+    "id": "ridge-gourd",
+    "nameEn": "Ridge gourd",
+    "nameHi": "तोरई",
+    "nameMr": "दोडका",
+    "category": "vegetable",
+    "defaultUnit": "g",
+    "defaultQty": 500,
+    "shelfLifeDays": 4,
+    "seasonMonths": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "rotation": "biweekly",
+    "peakMonths": [
+      6,
+      7,
+      8
+    ]
+  },
+  {
+    "id": "bitter-gourd",
+    "nameEn": "Bitter gourd",
+    "nameHi": "करेला",
+    "nameMr": "कारले",
+    "category": "vegetable",
+    "defaultUnit": "g",
+    "defaultQty": 250,
+    "shelfLifeDays": 5,
+    "seasonMonths": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "rotation": "on_demand",
+    "peakMonths": [
+      6,
+      7
+    ]
+  },
+  {
+    "id": "cucumber",
+    "nameEn": "Cucumber",
+    "nameHi": "खीरा",
+    "nameMr": "काकडी",
+    "category": "vegetable",
+    "defaultUnit": "g",
+    "defaultQty": 500,
+    "shelfLifeDays": 5,
+    "seasonMonths": [],
+    "rotation": "weekly",
+    "peakMonths": [
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "id": "french-beans",
+    "nameEn": "French beans",
+    "nameHi": "फ्रेंच बीन्स",
+    "nameMr": "फरसबी",
+    "category": "vegetable",
+    "defaultUnit": "g",
+    "defaultQty": 250,
+    "shelfLifeDays": 4,
+    "seasonMonths": [
+      10,
+      11,
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "rotation": "biweekly",
+    "peakMonths": [
+      12,
+      1,
+      2
+    ]
+  },
+  {
+    "id": "cluster-beans",
+    "nameEn": "Cluster beans",
+    "nameHi": "ग्वार फली",
+    "nameMr": "गवार",
+    "category": "vegetable",
+    "defaultUnit": "g",
+    "defaultQty": 250,
+    "shelfLifeDays": 4,
+    "seasonMonths": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "rotation": "on_demand",
+    "peakMonths": [
+      6,
+      7,
+      8
+    ]
+  },
+  {
+    "id": "green-peas",
+    "nameEn": "Green peas",
+    "nameHi": "हरी मटर",
+    "nameMr": "मटार",
+    "category": "vegetable",
+    "defaultUnit": "g",
+    "defaultQty": 500,
+    "shelfLifeDays": 4,
+    "seasonMonths": [
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "rotation": "weekly",
+    "peakMonths": [
+      12,
+      1
+    ]
+  },
+  {
+    "id": "drumstick",
+    "nameEn": "Drumstick",
+    "nameHi": "सहजन",
+    "nameMr": "शेवगा",
+    "category": "vegetable",
+    "defaultUnit": "pc",
+    "defaultQty": 4,
+    "shelfLifeDays": 5,
+    "seasonMonths": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rotation": "on_demand",
+    "peakMonths": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "red-pumpkin",
+    "nameEn": "Red pumpkin",
+    "nameHi": "कद्दू",
+    "nameMr": "लाल भोपळा",
+    "category": "vegetable",
+    "defaultUnit": "g",
+    "defaultQty": 500,
+    "shelfLifeDays": 10,
+    "seasonMonths": [],
+    "rotation": "on_demand",
+    "peakMonths": [
+      9,
+      10
+    ]
+  },
+  {
+    "id": "ivy-gourd",
+    "nameEn": "Ivy gourd",
+    "nameHi": "कुंदरू",
+    "nameMr": "तोंडली",
+    "category": "vegetable",
+    "defaultUnit": "g",
+    "defaultQty": 250,
+    "shelfLifeDays": 4,
+    "seasonMonths": [],
+    "rotation": "biweekly",
+    "peakMonths": [
+      5,
+      6,
+      7
+    ]
+  },
+  {
+    "id": "snake-gourd",
+    "nameEn": "Snake gourd",
+    "nameHi": "चिचिंडा",
+    "nameMr": "पडवळ",
+    "category": "vegetable",
+    "defaultUnit": "pc",
+    "defaultQty": 1,
+    "shelfLifeDays": 4,
+    "seasonMonths": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "rotation": "on_demand",
+    "peakMonths": [
+      7,
+      8
+    ]
+  },
+  {
+    "id": "flat-beans",
+    "nameEn": "Flat beans",
+    "nameHi": "सेम",
+    "nameMr": "वालपापडी",
+    "category": "vegetable",
+    "defaultUnit": "g",
+    "defaultQty": 250,
+    "shelfLifeDays": 4,
+    "seasonMonths": [
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "rotation": "biweekly",
+    "peakMonths": [
+      12,
+      1
+    ]
+  },
+  {
+    "id": "raw-banana",
+    "nameEn": "Raw banana",
+    "nameHi": "कच्चा केला",
+    "nameMr": "कच्ची केळी",
+    "category": "vegetable",
+    "defaultUnit": "pc",
+    "defaultQty": 2,
+    "shelfLifeDays": 5,
+    "seasonMonths": [],
+    "rotation": "on_demand",
+    "peakMonths": []
+  },
+  {
+    "id": "sweet-corn",
+    "nameEn": "Sweet corn",
+    "nameHi": "मकई",
+    "nameMr": "मका",
+    "category": "vegetable",
+    "defaultUnit": "pc",
+    "defaultQty": 2,
+    "shelfLifeDays": 3,
+    "seasonMonths": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "rotation": "on_demand",
+    "peakMonths": [
+      7,
+      8,
+      9
+    ]
+  },
+  {
+    "id": "raw-mango",
+    "nameEn": "Raw mango",
+    "nameHi": "कच्चा आम",
+    "nameMr": "कैरी",
+    "category": "vegetable",
+    "defaultUnit": "pc",
+    "defaultQty": 2,
+    "shelfLifeDays": 7,
+    "seasonMonths": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "rotation": "on_demand",
+    "peakMonths": [
+      4,
+      5
+    ]
+  },
+  {
+    "id": "long-beans",
+    "nameEn": "Long beans",
+    "nameHi": "लोबिया फली",
+    "nameMr": "चवळीच्या शेंगा",
+    "category": "vegetable",
+    "defaultUnit": "g",
+    "defaultQty": 250,
+    "shelfLifeDays": 4,
+    "seasonMonths": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "rotation": "on_demand",
+    "peakMonths": [
+      7,
+      8
+    ]
+  },
+  {
+    "id": "onion",
+    "nameEn": "Onion",
+    "nameHi": "प्याज",
+    "nameMr": "कांदा",
+    "category": "root",
+    "defaultUnit": "kg",
+    "defaultQty": 2,
+    "shelfLifeDays": 30,
+    "seasonMonths": [],
+    "rotation": "weekly",
+    "peakMonths": []
+  },
+  {
+    "id": "potato",
+    "nameEn": "Potato",
+    "nameHi": "आलू",
+    "nameMr": "बटाटा",
+    "category": "root",
+    "defaultUnit": "kg",
+    "defaultQty": 2,
+    "shelfLifeDays": 30,
+    "seasonMonths": [],
+    "rotation": "weekly",
+    "peakMonths": [
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "id": "carrot",
+    "nameEn": "Carrot",
+    "nameHi": "गाजर",
+    "nameMr": "गाजर",
+    "category": "root",
+    "defaultUnit": "g",
+    "defaultQty": 500,
+    "shelfLifeDays": 10,
+    "seasonMonths": [],
+    "rotation": "weekly",
+    "peakMonths": [
+      12,
+      1,
+      2
+    ]
+  },
+  {
+    "id": "beetroot",
+    "nameEn": "Beetroot",
+    "nameHi": "चुकंदर",
+    "nameMr": "बीट",
+    "category": "root",
+    "defaultUnit": "g",
+    "defaultQty": 500,
+    "shelfLifeDays": 10,
+    "seasonMonths": [],
+    "rotation": "biweekly",
+    "peakMonths": [
+      12,
+      1,
+      2
+    ]
+  },
+  {
+    "id": "radish",
+    "nameEn": "Radish",
+    "nameHi": "मूली",
+    "nameMr": "मुळा",
+    "category": "root",
+    "defaultUnit": "pc",
+    "defaultQty": 2,
+    "shelfLifeDays": 6,
+    "seasonMonths": [
+      10,
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "rotation": "on_demand",
+    "peakMonths": [
+      12,
+      1
+    ]
+  },
+  {
+    "id": "sweet-potato",
+    "nameEn": "Sweet potato",
+    "nameHi": "शकरकंद",
+    "nameMr": "रताळे",
+    "category": "root",
+    "defaultUnit": "g",
+    "defaultQty": 500,
+    "shelfLifeDays": 14,
+    "seasonMonths": [
+      10,
+      11,
+      12,
+      1,
+      2
+    ],
+    "rotation": "on_demand",
+    "peakMonths": [
+      11,
+      12
+    ]
+  },
+  {
+    "id": "colocasia",
+    "nameEn": "Colocasia root",
+    "nameHi": "अरबी",
+    "nameMr": "अळकुडी",
+    "category": "root",
+    "defaultUnit": "g",
+    "defaultQty": 500,
+    "shelfLifeDays": 10,
+    "seasonMonths": [
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "rotation": "on_demand",
+    "peakMonths": [
+      9,
+      10
+    ]
+  },
+  {
+    "id": "banana",
+    "nameEn": "Banana",
+    "nameHi": "केला",
+    "nameMr": "केळी",
+    "category": "fruit",
+    "defaultUnit": "dozen",
+    "defaultQty": 1,
+    "shelfLifeDays": 4,
+    "seasonMonths": [],
+    "rotation": "weekly",
+    "peakMonths": []
+  },
+  {
+    "id": "apple",
+    "nameEn": "Apple",
+    "nameHi": "सेब",
+    "nameMr": "सफरचंद",
+    "category": "fruit",
+    "defaultUnit": "kg",
+    "defaultQty": 1,
+    "shelfLifeDays": 14,
+    "seasonMonths": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      1,
+      2
+    ],
+    "rotation": "biweekly",
+    "peakMonths": [
+      9,
+      10,
+      11
+    ]
+  },
+  {
+    "id": "papaya",
+    "nameEn": "Papaya",
+    "nameHi": "पपीता",
+    "nameMr": "पपई",
+    "category": "fruit",
+    "defaultUnit": "pc",
+    "defaultQty": 1,
+    "shelfLifeDays": 4,
+    "seasonMonths": [],
+    "rotation": "biweekly",
+    "peakMonths": []
+  },
+  {
+    "id": "pomegranate",
+    "nameEn": "Pomegranate",
+    "nameHi": "अनार",
+    "nameMr": "डाळिंब",
+    "category": "fruit",
+    "defaultUnit": "kg",
+    "defaultQty": 1,
+    "shelfLifeDays": 14,
+    "seasonMonths": [],
+    "rotation": "biweekly",
+    "peakMonths": [
+      10,
+      11,
+      12
+    ]
+  },
+  {
+    "id": "mango",
+    "nameEn": "Mango (Alphonso)",
+    "nameHi": "आम",
+    "nameMr": "आंबा",
+    "category": "fruit",
+    "defaultUnit": "dozen",
+    "defaultQty": 1,
+    "shelfLifeDays": 5,
+    "seasonMonths": [
+      4,
+      5,
+      6
+    ],
+    "rotation": "weekly",
+    "peakMonths": [
+      4,
+      5
+    ]
+  },
+  {
+    "id": "chikoo",
+    "nameEn": "Chikoo",
+    "nameHi": "चीकू",
+    "nameMr": "चिकू",
+    "category": "fruit",
+    "defaultUnit": "g",
+    "defaultQty": 500,
+    "shelfLifeDays": 4,
+    "seasonMonths": [
+      10,
+      11,
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "rotation": "biweekly",
+    "peakMonths": [
+      12,
+      1,
+      2
+    ]
+  },
+  {
+    "id": "guava",
+    "nameEn": "Guava",
+    "nameHi": "अमरूद",
+    "nameMr": "पेरू",
+    "category": "fruit",
+    "defaultUnit": "g",
+    "defaultQty": 500,
+    "shelfLifeDays": 5,
+    "seasonMonths": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      1,
+      2
+    ],
+    "rotation": "biweekly",
+    "peakMonths": [
+      11,
+      12
+    ]
+  },
+  {
+    "id": "orange",
+    "nameEn": "Orange (Nagpur)",
+    "nameHi": "संतरा",
+    "nameMr": "संत्री",
+    "category": "fruit",
+    "defaultUnit": "kg",
+    "defaultQty": 1,
+    "shelfLifeDays": 10,
+    "seasonMonths": [
+      11,
+      12,
+      1,
+      2
+    ],
+    "rotation": "weekly",
+    "peakMonths": [
+      12,
+      1
+    ]
+  },
+  {
+    "id": "sweet-lime",
+    "nameEn": "Sweet lime",
+    "nameHi": "मौसंबी",
+    "nameMr": "मोसंबी",
+    "category": "fruit",
+    "defaultUnit": "kg",
+    "defaultQty": 1,
+    "shelfLifeDays": 10,
+    "seasonMonths": [],
+    "rotation": "biweekly",
+    "peakMonths": []
+  },
+  {
+    "id": "watermelon",
+    "nameEn": "Watermelon",
+    "nameHi": "तरबूज",
+    "nameMr": "कलिंगड",
+    "category": "fruit",
+    "defaultUnit": "pc",
+    "defaultQty": 1,
+    "shelfLifeDays": 7,
+    "seasonMonths": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "rotation": "on_demand",
+    "peakMonths": [
+      4,
+      5
+    ]
+  },
+  {
+    "id": "grapes",
+    "nameEn": "Grapes",
+    "nameHi": "अंगूर",
+    "nameMr": "द्राक्षे",
+    "category": "fruit",
+    "defaultUnit": "g",
+    "defaultQty": 500,
+    "shelfLifeDays": 5,
+    "seasonMonths": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "rotation": "weekly",
+    "peakMonths": [
+      2,
+      3
+    ]
+  },
+  {
+    "id": "custard-apple",
+    "nameEn": "Custard apple",
+    "nameHi": "सीताफल",
+    "nameMr": "सीताफळ",
+    "category": "fruit",
+    "defaultUnit": "pc",
+    "defaultQty": 4,
+    "shelfLifeDays": 3,
+    "seasonMonths": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "rotation": "on_demand",
+    "peakMonths": [
+      9,
+      10
+    ]
+  },
+  {
+    "id": "pineapple",
+    "nameEn": "Pineapple",
+    "nameHi": "अनानास",
+    "nameMr": "अननस",
+    "category": "fruit",
+    "defaultUnit": "pc",
+    "defaultQty": 1,
+    "shelfLifeDays": 5,
+    "seasonMonths": [
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "rotation": "on_demand",
+    "peakMonths": [
+      6,
+      7
+    ]
+  },
+  {
+    "id": "strawberry",
+    "nameEn": "Strawberry",
+    "nameHi": "स्ट्रॉबेरी",
+    "nameMr": "स्ट्रॉबेरी",
+    "category": "fruit",
+    "defaultUnit": "g",
+    "defaultQty": 250,
+    "shelfLifeDays": 3,
+    "seasonMonths": [
+      12,
+      1,
+      2,
+      3
+    ],
+    "rotation": "on_demand",
+    "peakMonths": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": "coconut",
+    "nameEn": "Coconut",
+    "nameHi": "नारियल",
+    "nameMr": "नारळ",
+    "category": "fruit",
+    "defaultUnit": "pc",
+    "defaultQty": 1,
+    "shelfLifeDays": 21,
+    "seasonMonths": [],
+    "rotation": "biweekly",
+    "peakMonths": []
+  },
+  {
+    "id": "jamun",
+    "nameEn": "Jamun",
+    "nameHi": "जामुन",
+    "nameMr": "जांभूळ",
+    "category": "fruit",
+    "defaultUnit": "g",
+    "defaultQty": 250,
+    "shelfLifeDays": 2,
+    "seasonMonths": [
+      6,
+      7
+    ],
+    "rotation": "on_demand",
+    "peakMonths": [
+      6
+    ]
+  }
+]
