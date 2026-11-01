@@ -85,7 +85,7 @@ export const recogniseDelivery = onCall(
       const response = await client.messages.parse({
         model: MODEL,
         max_tokens: 4000,
-        output_config: { effort: 'low', format: zodOutputFormat(RecognitionSchema) },
+        output_config: { effort: 'medium', format: zodOutputFormat(RecognitionSchema) },
         system: SYSTEM,
         messages: [
           {
