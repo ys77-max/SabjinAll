@@ -10,3 +10,4 @@ functions/node_modules
 serviceAccount*.json
 *.tsbuildinfo
 functions/.secret.local
+functions/.env

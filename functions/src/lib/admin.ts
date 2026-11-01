@@ -13,8 +13,15 @@ export { FieldValue, Timestamp };
 
 export const REGION = 'asia-south1';
 
-/** Shared options for callables: App Check enforced in production (the emulator has no App Check), region pinned. */
-export const callableOpts = { region: REGION, enforceAppCheck: process.env.FUNCTIONS_EMULATOR !== 'true' } as const;
+/**
+ * Shared options for callables. App Check is enforced only when ENFORCE_APP_CHECK=true
+ * (set from the GitHub variable at deploy) — switch it on once the console shows ~100% verified
+ * requests, so a half-configured App Check never locks users out. Never enforced in the emulator.
+ */
+export const callableOpts = {
+  region: REGION,
+  enforceAppCheck: process.env.ENFORCE_APP_CHECK === 'true' && process.env.FUNCTIONS_EMULATOR !== 'true',
+} as const;
 
 export const hh = (householdId: string) => db.collection('households').doc(householdId);
 

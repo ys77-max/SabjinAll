@@ -86,7 +86,13 @@ Set `VITE_APPCHECK_DEBUG=true` locally to use an App Check debug token.
 2. **Repository secret** (Settings → Secrets and variables → Actions → Secrets): `FIREBASE_SERVICE_ACCOUNT` = the key's JSON.
 3. **Repository variables** (same page → Variables): `FIREBASE_PROJECT_ID` and the web config `VITE_FIREBASE_API_KEY`, `VITE_FIREBASE_AUTH_DOMAIN`, `VITE_FIREBASE_STORAGE_BUCKET`, `VITE_FIREBASE_MESSAGING_SENDER_ID`, `VITE_FIREBASE_APP_ID`, `VITE_FIREBASE_VAPID_KEY`, `VITE_FIREBASE_APPCHECK_SITE_KEY`. These are public client config, so variables rather than secrets.
 4. **Vision key**, once: Google Cloud console → Security → Secret Manager → *Create secret* named `ANTHROPIC_API_KEY` (or `firebase functions:secrets:set ANTHROPIC_API_KEY` from your machine). The workflow never sees it.
-5. Optionally add required reviewers to the `production` environment (Settings → Environments) so each deploy waits for approval.
+5. **App Check** (protects the backend from scripts that aren't your app):
+   1. Google Cloud console → *Security* → **reCAPTCHA** → *Create key*: type **Website**, domains `<project-id>.web.app` and `<project-id>.firebaseapp.com` (plus `localhost` for local dev), no checkbox challenge. Copy the key ID.
+   2. Firebase console → **App Check** → *Apps* → your web app → **reCAPTCHA Enterprise** → paste the key → *Save*.
+   3. Set the GitHub variable `VITE_FIREBASE_APPCHECK_SITE_KEY` to that key and deploy. The app now attaches App Check tokens, but nothing is enforced yet.
+   4. Use the app for a day, then check App Check → *APIs*: once Firestore, Storage and Cloud Functions show ~100% **verified** requests, click **Enforce** for Firestore and Storage, and set the GitHub variable `ENFORCE_APP_CHECK` = `true` and redeploy for the Functions.
+   5. Local development: set `VITE_APPCHECK_DEBUG=true`, copy the debug token the browser console prints, and add it under App Check → *Apps* → ⋮ → *Manage debug tokens*. Preview-channel domains also need adding to the reCAPTCHA key.
+6. Optionally add required reviewers to the `production` environment (Settings → Environments) so each deploy waits for approval.
 
 Run a deploy by hand from Actions → *Deploy to Firebase* → *Run workflow*.
 

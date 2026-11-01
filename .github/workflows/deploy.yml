@@ -7,7 +7,7 @@ name: Deploy to Firebase
 #   secret:    FIREBASE_SERVICE_ACCOUNT  (service account key JSON)
 #   variables: FIREBASE_PROJECT_ID, VITE_FIREBASE_API_KEY, VITE_FIREBASE_AUTH_DOMAIN,
 #              VITE_FIREBASE_STORAGE_BUCKET, VITE_FIREBASE_MESSAGING_SENDER_ID, VITE_FIREBASE_APP_ID,
-#              VITE_FIREBASE_VAPID_KEY, VITE_FIREBASE_APPCHECK_SITE_KEY
+#              VITE_FIREBASE_VAPID_KEY, VITE_FIREBASE_APPCHECK_SITE_KEY, ENFORCE_APP_CHECK (optional)
 #   once: Secret Manager secret ANTHROPIC_API_KEY (console, or firebase functions:secrets:set)
 
 on:
@@ -71,6 +71,11 @@ jobs:
           done
           [ "$missing" = 0 ]
           npm run build
+
+      - name: Functions config
+        # Cloud Functions read functions/.env at deploy. App Check is enforced on the callables
+        # only when the repository variable ENFORCE_APP_CHECK is 'true'.
+        run: echo "ENFORCE_APP_CHECK=${{ vars.ENFORCE_APP_CHECK == 'true' && 'true' || 'false' }}" > functions/.env
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
