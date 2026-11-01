@@ -8,7 +8,7 @@ import { db, hh, storage, callableOpts, requireAuth, requireMember, str } from '
 import { statusFromConfidence } from './engine';
 
 export const ANTHROPIC_API_KEY = defineSecret('ANTHROPIC_API_KEY');
-const MODEL = 'claude-opus-5-5';
+const MODEL = 'claude-haiku-5-5';
 
 const RecognitionSchema = z.object({
   items: z.array(
@@ -81,11 +81,10 @@ export const recogniseDelivery = onCall(
       const mediaType = (meta.contentType ?? 'image/jpeg') as 'image/jpeg' | 'image/png' | 'image/webp' | 'image/gif';
 
       const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY.value() });
-      const response = await client.beta.messages.parse({
+      // Haiku 5.5 has no server-side refusal fallback; a refusal falls through to the client tick list.
+      const response = await client.messages.parse({
         model: MODEL,
         max_tokens: 4000,
-        betas: ['server-side-fallback-2026-07-01'],
-        fallbacks: 'default',
         output_config: { effort: 'low', format: zodOutputFormat(RecognitionSchema) },
         system: SYSTEM,
         messages: [

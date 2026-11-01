@@ -12,7 +12,7 @@ Every order day the app proposes a list (rotation + shelf life + season + "finis
 | Data | Firestore with `persistentLocalCache` (offline-first; writes queue and sync) |
 | Auth | Firebase Auth phone OTP (invisible reCAPTCHA) |
 | Backend | Cloud Functions v2 (Node 20, TypeScript), Cloud Scheduler, FCM web push, App Check |
-| Photos | Cloud Storage (7-day lifecycle) + `recogniseDelivery` (Claude vision via the Anthropic SDK, key in Functions secrets) |
+| Photos | Cloud Storage (7-day lifecycle) + `recogniseDelivery` (Claude Haiku 5.5 vision via the Anthropic SDK, key in Functions secrets) |
 | Messaging | `https://wa.me/<number>?text=…` deep links from the client |
 
 ## Layout
