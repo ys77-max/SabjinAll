@@ -1,5 +1,8 @@
 # SabziList
 
+[![Tests](https://github.com/ys77-max/SabjinAll/actions/workflows/test.yml/badge.svg)](https://github.com/ys77-max/SabjinAll/actions/workflows/test.yml)
+[![Deploy](https://github.com/ys77-max/SabjinAll/actions/workflows/deploy.yml/badge.svg)](https://github.com/ys77-max/SabjinAll/actions/workflows/deploy.yml)
+
 A mobile-first PWA that automates a household's weekly vegetable and fruit order to a WhatsApp vendor.
 
 Every order day the app proposes a list (rotation + shelf life + season + "finished" taps + carry-overs). The home-maker reviews it and taps **Approve & Send**, which opens WhatsApp with a numbered list in the vendor's language (Marathi / Hindi / English). A photo of the delivered basket is checked against the order, and one-tap **Finished** buttons track stock during the week. When the vendor is late, the app prompts a polite reminder. The vendor only receives WhatsApp messages and installs nothing.
