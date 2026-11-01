@@ -2,13 +2,10 @@ name: Tests
 
 on:
   push:
-    branches: [main]
+    branches-ignore: [main] # main is covered by deploy.yml, which calls this workflow first
   pull_request:
   workflow_dispatch:
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  workflow_call: # reused by deploy.yml so a deploy only happens after the tests pass
 
 permissions:
   contents: read

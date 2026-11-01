@@ -78,6 +78,18 @@ firebase emulators:start         # auth, firestore, functions, storage, hosting
 
 Set `VITE_APPCHECK_DEBUG=true` locally to use an App Check debug token.
 
+## Continuous deployment
+
+`.github/workflows/test.yml` runs the unit tests, the web build and the security rules tests on every pull request and branch push. On `main`, `.github/workflows/deploy.yml` runs those same tests first and then deploys hosting, Firestore rules + indexes, Storage rules and Cloud Functions, and applies the 7-day photo lifecycle rule. The deploy job is skipped until it is configured:
+
+1. **Service account.** In Google Cloud console → IAM → Service accounts, create `github-deployer` in your Firebase project with these roles: Firebase Admin, Cloud Functions Admin, Cloud Scheduler Admin, Secret Manager Viewer, Service Account User, Storage Admin. Create a JSON key.
+2. **Repository secret** (Settings → Secrets and variables → Actions → Secrets): `FIREBASE_SERVICE_ACCOUNT` = the key's JSON.
+3. **Repository variables** (same page → Variables): `FIREBASE_PROJECT_ID` and the web config `VITE_FIREBASE_API_KEY`, `VITE_FIREBASE_AUTH_DOMAIN`, `VITE_FIREBASE_STORAGE_BUCKET`, `VITE_FIREBASE_MESSAGING_SENDER_ID`, `VITE_FIREBASE_APP_ID`, `VITE_FIREBASE_VAPID_KEY`, `VITE_FIREBASE_APPCHECK_SITE_KEY`. These are public client config, so variables rather than secrets.
+4. **Vision key**, once from your machine: `firebase functions:secrets:set ANTHROPIC_API_KEY`. The workflow never sees it.
+5. Optionally add required reviewers to the `production` environment (Settings → Environments) so each deploy waits for approval.
+
+Run a deploy by hand from Actions → *Deploy to Firebase* → *Run workflow*.
+
 ## Engine rules (Cloud Functions; the client only renders)
 
 1. Carry-overs from the last delivery (`not_seen` / `short`) → `shortage_carry`

@@ -1,0 +1,94 @@
+name: Deploy to Firebase
+
+# Deploys hosting, Firestore rules + indexes, Storage rules and Cloud Functions after the
+# test workflow passes. Skips itself until the repository variable FIREBASE_PROJECT_ID is set.
+#
+# One-time setup (README → "Continuous deployment"):
+#   secret:    FIREBASE_SERVICE_ACCOUNT  (service account key JSON)
+#   variables: FIREBASE_PROJECT_ID, VITE_FIREBASE_API_KEY, VITE_FIREBASE_AUTH_DOMAIN,
+#              VITE_FIREBASE_STORAGE_BUCKET, VITE_FIREBASE_MESSAGING_SENDER_ID, VITE_FIREBASE_APP_ID,
+#              VITE_FIREBASE_VAPID_KEY, VITE_FIREBASE_APPCHECK_SITE_KEY
+#   once from your machine: firebase functions:secrets:set ANTHROPIC_API_KEY
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Never run two deploys at once, and never cancel one half-way.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  tests:
+    uses: ./.github/workflows/test.yml
+
+  deploy:
+    name: Deploy
+    needs: tests
+    if: vars.FIREBASE_PROJECT_ID != ''
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://${{ vars.FIREBASE_PROJECT_ID }}.web.app
+    env:
+      PROJECT_ID: ${{ vars.FIREBASE_PROJECT_ID }}
+      BUCKET: ${{ vars.VITE_FIREBASE_STORAGE_BUCKET }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          npm --prefix functions ci
+
+      - name: Build web app
+        env:
+          VITE_FIREBASE_API_KEY: ${{ vars.VITE_FIREBASE_API_KEY }}
+          VITE_FIREBASE_AUTH_DOMAIN: ${{ vars.VITE_FIREBASE_AUTH_DOMAIN }}
+          VITE_FIREBASE_PROJECT_ID: ${{ vars.FIREBASE_PROJECT_ID }}
+          VITE_FIREBASE_STORAGE_BUCKET: ${{ vars.VITE_FIREBASE_STORAGE_BUCKET }}
+          VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ vars.VITE_FIREBASE_MESSAGING_SENDER_ID }}
+          VITE_FIREBASE_APP_ID: ${{ vars.VITE_FIREBASE_APP_ID }}
+          VITE_FIREBASE_VAPID_KEY: ${{ vars.VITE_FIREBASE_VAPID_KEY }}
+          VITE_FIREBASE_APPCHECK_SITE_KEY: ${{ vars.VITE_FIREBASE_APPCHECK_SITE_KEY }}
+          VITE_FUNCTIONS_REGION: asia-south1
+          VITE_USE_EMULATORS: 'false'
+        run: |
+          missing=0
+          for v in VITE_FIREBASE_API_KEY VITE_FIREBASE_AUTH_DOMAIN VITE_FIREBASE_STORAGE_BUCKET \
+                   VITE_FIREBASE_MESSAGING_SENDER_ID VITE_FIREBASE_APP_ID; do
+            if [ -z "${!v}" ]; then echo "::error::Repository variable $v is not set"; missing=1; fi
+          done
+          [ "$missing" = 0 ]
+          npm run build
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+
+      - name: Deploy
+        # --force lets the CLI delete Cloud Functions removed from the source instead of
+        # stopping to ask, which it cannot do in CI.
+        run: >-
+          npx firebase deploy
+          --project "$PROJECT_ID"
+          --only hosting,firestore,storage,functions
+          --non-interactive --force
+          --message "${GITHUB_SHA::7} via GitHub Actions"
+
+      - name: Set up gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Apply 7-day photo lifecycle rule
+        run: gcloud storage buckets update "gs://$BUCKET" --lifecycle-file=storage-lifecycle.json --project "$PROJECT_ID"
