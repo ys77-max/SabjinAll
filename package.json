@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "typecheck": "tsc -b --noEmit",
     "icons": "node scripts/make-icons.mjs",
-    "seed": "node scripts/seed-firestore.mjs"
+    "seed": "node scripts/seed-firestore.mjs",
+    "test:rules": "firebase emulators:exec --only firestore,storage --project demo-sabzilist \"node --test --test-concurrency=1 tests/rules/*.test.mjs\""
   },
   "dependencies": {
     "firebase": "11.1.0",

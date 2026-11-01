@@ -72,6 +72,7 @@ firestore.rules, storage.rules, firestore.indexes.json, storage-lifecycle.json, 
 ```bash
 npm run dev                      # web app
 npm --prefix functions test      # engine + message template unit tests
+npm run test:rules               # Firestore + Storage security rules (starts emulators, needs Java)
 firebase emulators:start         # auth, firestore, functions, storage, hosting
 ```
 
